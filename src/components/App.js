@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SplitBills from "../SplitBills";
 import FriendList from "./FriendList";
 
@@ -23,9 +24,14 @@ const initialFriends = [
 ];
 
 export default function App() {
+  const [friends, setFriends] = useState(initialFriends);
+
+  function handleAddFriend(newFriend) {
+    setFriends((friends) => [...friends, newFriend]);
+  }
   return (
     <div className="app">
-      <FriendList data={initialFriends} />
+      <FriendList data={friends} onAddFriend={handleAddFriend} />
       <SplitBills />
     </div>
   );
