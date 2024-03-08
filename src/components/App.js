@@ -41,6 +41,17 @@ export default function App() {
   function handleAddFriend(newFriend) {
     setFriends((friends) => [...friends, newFriend]);
   }
+
+  function handleSplitBill(value) {
+    setFriends((friends) =>
+      friends.map((friend) =>
+        friend.id === selectedFriend.id
+          ? { ...friend, balance: friend.balance + value }
+          : friend
+      )
+    );
+    setSelectedFriend(null);
+  }
   return (
     <div className="app">
       <FriendList
@@ -51,7 +62,12 @@ export default function App() {
         onSelection={handleSelection}
         selectedFriend={selectedFriend}
       />
-      {selectedFriend && <SplitBills selectedFriend={selectedFriend} />}
+      {selectedFriend && (
+        <SplitBills
+          selectedFriend={selectedFriend}
+          onSplitBill={handleSplitBill}
+        />
+      )}
     </div>
   );
 }
