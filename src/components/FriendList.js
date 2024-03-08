@@ -1,8 +1,15 @@
 import AddFriend from "./AddFriend";
 import Friend from "./Friend";
 import Button from "./Button";
+import { useState } from "react";
 
 export default function FriendList({ data, onAddFriend }) {
+  const [showAddFriend, setShowAddFriend] = useState(false);
+
+  function handleClick() {
+    setShowAddFriend((show) => !show);
+    console.log(showAddFriend);
+  }
   return (
     <div className="sidebar">
       <ul>
@@ -15,8 +22,10 @@ export default function FriendList({ data, onAddFriend }) {
           />
         ))}
       </ul>
-      <AddFriend onAddFriend={onAddFriend} />
-      <Button>Close</Button>
+      {!showAddFriend && <Button onClick={handleClick}>Add Friend</Button>}
+      {showAddFriend && (
+        <AddFriend onAddFriend={onAddFriend} handleClick={handleClick} />
+      )}
     </div>
   );
 }

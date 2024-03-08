@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 
-export default function AddFriend({ onAddFriend }) {
+export default function AddFriend({ onAddFriend, handleClick }) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("https://i.pravatar.cc/48");
 
@@ -25,20 +25,23 @@ export default function AddFriend({ onAddFriend }) {
     setImageUrl("https://i.pravatar.cc/48");
   }
   return (
-    <form className="form-split-bill" onSubmit={handleSubmit}>
-      <lable> 👩🏼‍🤝‍👩🏼 Friend name</lable>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <label> 💽 Image URL</label>
-      <input
-        type="text"
-        value={imageUrl}
-        onChange={(e) => setImageUrl(e.target.value)}
-      />
-      <Button>Add</Button>
-    </form>
+    <>
+      <form className="form-split-bill" onSubmit={handleSubmit}>
+        <lable> 👩🏼‍🤝‍👩🏼 Friend name</lable>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label> 💽 Image URL</label>
+        <input
+          type="text"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+        />
+        <Button>Add</Button>
+      </form>
+      <Button onClick={handleClick}>Close</Button>
+    </>
   );
 }
