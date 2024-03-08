@@ -1,3 +1,6 @@
+import SplitBills from "../SplitBills";
+import FriendList from "./FriendList";
+
 const initialFriends = [
   {
     id: 118836,
@@ -18,3 +21,12 @@ const initialFriends = [
     balance: 0,
   },
 ];
+
+export default function App() {
+  return (
+    <div className="app">
+      <FriendList data={initialFriends} />
+      <SplitBills />
+    </div>
+  );
+}
