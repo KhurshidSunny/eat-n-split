@@ -25,14 +25,33 @@ const initialFriends = [
 
 export default function App() {
   const [friends, setFriends] = useState(initialFriends);
+  const [selectedFriend, setSelectedFriend] = useState(null);
+  const [showAddFriend, setShowAddFriend] = useState(false);
+
+  function handleShowFriend() {
+    setShowAddFriend((show) => !show);
+  }
+
+  function handleSelection(friend) {
+    // setSelectedFriend(friend);
+    setSelectedFriend((cur) => (cur?.id === friend.id ? null : friend));
+    setShowAddFriend(false);
+  }
 
   function handleAddFriend(newFriend) {
     setFriends((friends) => [...friends, newFriend]);
   }
   return (
     <div className="app">
-      <FriendList data={friends} onAddFriend={handleAddFriend} />
-      <SplitBills />
+      <FriendList
+        data={friends}
+        onAddFriend={handleAddFriend}
+        showAddFriend={showAddFriend}
+        onShowFriend={handleShowFriend}
+        onSelection={handleSelection}
+        selectedFriend={selectedFriend}
+      />
+      {selectedFriend && <SplitBills selectedFriend={selectedFriend} />}
     </div>
   );
 }

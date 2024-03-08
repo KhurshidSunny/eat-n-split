@@ -1,30 +1,30 @@
 import AddFriend from "./AddFriend";
 import Friend from "./Friend";
 import Button from "./Button";
-import { useState } from "react";
 
-export default function FriendList({ data, onAddFriend }) {
-  const [showAddFriend, setShowAddFriend] = useState(false);
-
-  function handleClick() {
-    setShowAddFriend((show) => !show);
-    console.log(showAddFriend);
-  }
+export default function FriendList({
+  data,
+  onAddFriend,
+  showAddFriend,
+  onShowFriend,
+  onSelection,
+  selectedFriend,
+}) {
   return (
     <div className="sidebar">
       <ul>
-        {data.map((frnd) => (
+        {data.map((friend) => (
           <Friend
-            name={frnd.name}
-            imageLink={frnd.image}
-            balance={frnd.balance}
-            key={frnd.id}
+            friend={friend}
+            onSelection={onSelection}
+            selectedFriend={selectedFriend}
+            key={friend.key}
           />
         ))}
       </ul>
-      {!showAddFriend && <Button onClick={handleClick}>Add Friend</Button>}
+      {!showAddFriend && <Button onClick={onShowFriend}>Add Friend</Button>}
       {showAddFriend && (
-        <AddFriend onAddFriend={onAddFriend} handleClick={handleClick} />
+        <AddFriend onAddFriend={onAddFriend} onShowFriend={onShowFriend} />
       )}
     </div>
   );

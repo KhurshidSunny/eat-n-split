@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 
-export default function AddFriend({ onAddFriend, handleClick }) {
+export default function AddFriend({ onAddFriend, onShowFriend }) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("https://i.pravatar.cc/48");
 
@@ -41,7 +41,7 @@ export default function AddFriend({ onAddFriend, handleClick }) {
         />
         <Button>Add</Button>
       </form>
-      <Button onClick={handleClick}>Close</Button>
+      <Button onClick={onShowFriend}>Close</Button>
     </>
   );
 }
